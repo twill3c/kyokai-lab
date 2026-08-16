@@ -136,6 +136,57 @@ input[type="range"] {
   font-size: 1.05rem;
 }
 
+.map-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.arch {
+  display: grid;
+  gap: 10px;
+}
+
+.arch-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-row button {
+  padding: 6px 14px;
+  min-height: 40px;
+}
+
+.arch-row button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.arch-label {
+  font-size: 0.85rem;
+  color: var(--fg-secondary);
+  margin-right: auto;
+}
+
+.param {
+  display: grid;
+  gap: 4px;
+}
+
+.param-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--fg-secondary);
+}
+
+.param-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
 .curve figcaption {
   font-size: 0.85rem;
   color: var(--fg-secondary);

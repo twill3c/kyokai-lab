@@ -9,3 +9,5 @@
 {"v": "1.2", "ts": "2026-08-17T02:38:44+09:00", "project": "kyokai-lab", "loop_id": "loop_002", "event": "test_run", "data": {"command": "npm run verify (vitest --coverage)", "passed": 24, "failed": 0}}
 {"v": "1.2", "ts": "2026-08-17T02:38:44+09:00", "project": "kyokai-lab", "loop_id": "loop_002", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-17T02:38:44+09:00", "project": "kyokai-lab", "loop_id": "loop_002", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-17T02:38:46+09:00", "project": "kyokai-lab", "loop_id": "loop_002", "event": "commit", "data": {"sha": "92c28a0", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-17T02:38:46+09:00", "project": "kyokai-lab", "loop_id": "loop_002", "event": "loop_end", "data": {"outcome": "success", "failure_count": 0, "summary": "可視化 UI 完成(XOR 固定構成)。テスト 24 件 green・verify PASS。実機確認は loop_003 の全機能結線後にまとめて実施"}}

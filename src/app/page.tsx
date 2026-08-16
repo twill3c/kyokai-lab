@@ -1,21 +1,25 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ArchPanel } from "@/components/ArchPanel";
 import { BoundaryCanvas } from "@/components/BoundaryCanvas";
 import { LossCurve } from "@/components/LossCurve";
 import { DATASETS } from "@/core/datasets";
 import { accuracy } from "@/core/nn";
 import type { Speed } from "@/core/schedule";
 import { SPEEDS } from "@/core/schedule";
-import type { NetSpec } from "@/core/types";
+import type { NetSpec, Sample } from "@/core/types";
 import { useNetTrainer } from "@/lib/useNetTrainer";
 
 const SEED = 1;
 
 export default function Home() {
-  const [datasetId] = useState(DATASETS[0].id);
-  const [spec] = useState<NetSpec>({ hidden: [6], activation: "tanh" });
-  const [lr] = useState(0.5);
+  const [datasetId, setDatasetId] = useState(DATASETS[0].id);
+  const [spec, setSpec] = useState<NetSpec>({
+    hidden: [6],
+    activation: "tanh",
+  });
+  const [lr, setLr] = useState(0.5);
 
   const dataset = DATASETS.find((d) => d.id === datasetId) ?? DATASETS[0];
   const samples = useMemo(() => dataset.make(SEED), [dataset]);
@@ -29,12 +33,27 @@ export default function Home() {
         </p>
       </header>
 
+      <nav className="map-tabs" aria-label="データセット選択">
+        {DATASETS.map((d) => (
+          <button
+            type="button"
+            key={d.id}
+            className={d.id === datasetId ? "active" : ""}
+            onClick={() => setDatasetId(d.id)}
+          >
+            {d.name}
+          </button>
+        ))}
+      </nav>
+
       {/* key で remount してデータセット・構成変更時に学習状態を作り直す */}
       <Playground
         key={`${dataset.id}:${spec.hidden.join("-")}:${spec.activation}`}
         samples={samples}
         spec={spec}
+        onSpecChange={setSpec}
         lr={lr}
+        onLrChange={setLr}
       />
     </main>
   );
@@ -43,11 +62,15 @@ export default function Home() {
 function Playground({
   samples,
   spec,
+  onSpecChange,
   lr,
+  onLrChange,
 }: {
-  samples: ReturnType<(typeof DATASETS)[number]["make"]>;
+  samples: Sample[];
   spec: NetSpec;
+  onSpecChange: (next: NetSpec) => void;
   lr: number;
+  onLrChange: (next: number) => void;
 }) {
   const trainer = useNetTrainer(samples, spec, SEED, lr);
   const acc = accuracy(trainer.net, samples);
@@ -90,7 +113,24 @@ function Playground({
       </section>
 
       <aside className="panel">
+        <ArchPanel spec={spec} onChange={onSpecChange} />
+
+        <label className="param">
+          <span className="param-label">
+            学習率 η<span className="param-value">{lr.toFixed(2)}</span>
+          </span>
+          <input
+            type="range"
+            min={0.05}
+            max={2}
+            step={0.05}
+            value={lr}
+            onChange={(e) => onLrChange(Number(e.target.value))}
+          />
+        </label>
+
         <LossCurve losses={trainer.lossHistory} />
+
         <dl className="stats">
           <div>
             <dt>ステップ</dt>
