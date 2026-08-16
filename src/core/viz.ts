@@ -24,16 +24,23 @@ function hex(rgb: [number, number, number]): string {
   );
 }
 
-/** 出力確率 → 発散配色(T-051)。p=0.5 が中立、0/1 で各極に飽和 */
-export function probColor(p: number): string {
-  if (p === 0.5) return PROB_NEUTRAL;
+/** 出力確率 → RGB(Canvas の ImageData 用) */
+export function probColorRgb(p: number): [number, number, number] {
+  if (p === 0.5) return [...NEUTRAL_RGB];
   const pole = p > 0.5 ? POS_POLE : NEG_POLE;
   const t = Math.min(Math.abs(p - 0.5) * 2, 1);
-  return hex([
+  return [
     lerp(NEUTRAL_RGB[0], pole[0], t),
     lerp(NEUTRAL_RGB[1], pole[1], t),
     lerp(NEUTRAL_RGB[2], pole[2], t),
-  ]);
+  ];
+}
+
+/** 出力確率 → 発散配色(T-051)。p=0.5 が中立、0/1 で各極に飽和 */
+export function probColor(p: number): string {
+  if (p === 0.5) return PROB_NEUTRAL;
+  const c = probColorRgb(p);
+  return hex([c[0], c[1], c[2]]);
 }
 
 /**
@@ -50,6 +57,23 @@ export function boundaryGrid(net: Net, res: number): number[] {
     }
   }
   return out;
+}
+
+/**
+ * 損失履歴への追記(T-053)。cap 超過時は偶数 index を残して半分に圧縮する。
+ * 曲線の概形を保ちながらメモリと描画コストを一定に抑える(F-08)
+ */
+export function pushLoss(
+  history: number[],
+  loss: number,
+  cap: number,
+): number[] {
+  const next =
+    history.length >= cap
+      ? history.filter((_, i) => i % 2 === 0)
+      : [...history];
+  next.push(loss);
+  return next;
 }
 
 /**

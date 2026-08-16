@@ -10,3 +10,5 @@
 {"v": "1.2", "ts": "2026-08-17T02:34:54+09:00", "project": "kyokai-lab", "loop_id": "loop_001", "event": "test_run", "data": {"command": "npm run verify (vitest --coverage)", "passed": 23, "failed": 0}}
 {"v": "1.2", "ts": "2026-08-17T02:34:55+09:00", "project": "kyokai-lab", "loop_id": "loop_001", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-17T02:34:55+09:00", "project": "kyokai-lab", "loop_id": "loop_001", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-17T02:35:03+09:00", "project": "kyokai-lab", "loop_id": "loop_001", "event": "commit", "data": {"sha": "5da5788", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-17T02:35:04+09:00", "project": "kyokai-lab", "loop_id": "loop_001", "event": "loop_end", "data": {"outcome": "success", "failure_count": 1, "summary": "NN コア完成: MLP・数値微分オラクル(G-01 全構成合格)・データセット 4 種・較正済み学習ゲート。テスト 23 件 green・カバレッジ 98.9/98.1/95.8/98.9・verify PASS。失敗 1 件(VERIF-FALSE: 暫定ゲート較正、spec_fix)"}}
