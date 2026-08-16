@@ -9,6 +9,7 @@ import { accuracy } from "@/core/nn";
 import type { Speed } from "@/core/schedule";
 import { SPEEDS } from "@/core/schedule";
 import type { NetSpec, Sample } from "@/core/types";
+import { FOOTER_LINKS } from "@/lib/links";
 import { useNetTrainer } from "@/lib/useNetTrainer";
 
 const SEED = 1;
@@ -55,6 +56,18 @@ export default function Home() {
         lr={lr}
         onLrChange={setLr}
       />
+
+      <footer className="footer">
+        {FOOTER_LINKS.map((l, i) => (
+          <span key={l.href}>
+            {i > 0 && " ・ "}
+            <a href={l.href} target="_blank" rel="noreferrer">
+              {l.label}
+            </a>
+            {l.label === "MIT License" && " © 2026 坂田哲朗"}
+          </span>
+        ))}
+      </footer>
     </main>
   );
 }

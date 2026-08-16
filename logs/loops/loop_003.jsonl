@@ -9,3 +9,5 @@
 {"v": "1.2", "ts": "2026-08-17T02:42:28+09:00", "project": "kyokai-lab", "loop_id": "loop_003", "event": "test_run", "data": {"command": "npm run verify (vitest --coverage)", "passed": 27, "failed": 0}}
 {"v": "1.2", "ts": "2026-08-17T02:42:29+09:00", "project": "kyokai-lab", "loop_id": "loop_003", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-17T02:42:29+09:00", "project": "kyokai-lab", "loop_id": "loop_003", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-17T02:42:40+09:00", "project": "kyokai-lab", "loop_id": "loop_003", "event": "commit", "data": {"sha": "bc8d198", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-17T02:42:40+09:00", "project": "kyokai-lab", "loop_id": "loop_003", "event": "loop_end", "data": {"outcome": "success", "failure_count": 0, "summary": "全機能結線完了。テスト 27 件 green・verify PASS・実機確認済み"}}
